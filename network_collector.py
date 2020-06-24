@@ -77,10 +77,9 @@ class HTTPHandler(BaseHTTPRequestHandler):
                     self.rtt_avg.set(result[1])
                 if result[2]:
                     self.rtt_max = Gauge('ping_rtt_max', 'RTT Max',registry=self.registry)
-                    self.rtt_max.set(result[2])
-                if result[3]:            
-                    self.packet_loss = Gauge('ping_packet_loss', 'Packet Loss',registry=self.registry)                            
-                    self.packet_loss.set(result[3])                               
+                    self.rtt_max.set(result[2])                      
+                self.packet_loss = Gauge('ping_packet_loss', 'Packet Loss',registry=self.registry)                            
+                self.packet_loss.set(result[3])                               
                 return MetricsHandler.do_GET(self)
             elif input_name.get('module')=='speedtest':
                 # http://localhost:8888/probe?module=speedtest
